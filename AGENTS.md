@@ -80,6 +80,17 @@ Build a clean, professional, conversion-focused single-page landing site for a t
 
 - Updated Duration from `8-12 Weeks` to `8 Weeks`.
 
+### Thank-You Page Branding
+
+- Updated `thank-you.html` to use the same Teamsource green palette as `index.html`.
+- Added matching Tailwind brand color config and Poppins font setup.
+- Replaced default blue confirmation accents with `brand-50`, `brand-100`, `brand-600`, and `brand-700`.
+- Preserved the current thank-you page structure:
+  - status pill
+  - heading
+  - supporting confirmation text
+  - two CTA buttons
+
 ## Netlify Form Setup (Implemented)
 
 Main form in `index.html` includes:
@@ -88,7 +99,7 @@ Main form in `index.html` includes:
 - `method="POST"`
 - `netlify`
 - hidden `form-name` field
-- `action="/thank-you"`
+- `action="/thank-you.html"`
 
 Fields included:
 
@@ -107,7 +118,7 @@ Fields included:
 ## Additional Files
 
 - `index.html` - main landing page
-- `thank-you.html` - post-submit confirmation page
+- `thank-you.html` - post-submit confirmation page using the same Teamsource green brand palette and Poppins font setup as the main landing page
 - `logo.png` - navbar logo asset
 
 ## SEO/Social Metadata Included
@@ -132,4 +143,5 @@ Fields included:
   - Clear CTA flow
   - Fast path to application form
 - Preserve brand green (`#1C8C49`) and clean professional tone.
+- Keep `thank-you.html` visually aligned with `index.html` by using the same Tailwind brand color config and overall brand styling direction.
 - If adjusting hero typography, ensure `.hero-main-title` still resolves to `3.45rem / 1.07`.
