@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Application Received | Teamsource Training Institute</title>
     <meta name="description" content="Thank you for applying for the Teamsource fully funded digital marketing scholarship." />
+    <link rel="icon" type="image/png" href="./logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -26,7 +27,7 @@
         <a href="/" class="flex items-center">
           <img src="./logo.png" alt="Teamsource logo" class="h-10 w-auto" />
         </a>
-        <a href="#share-section" class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Share Now</a>
+        <button id="headerShareButton" type="button" class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Share Now</button>
       </div>
     </header>
 
@@ -106,6 +107,7 @@ https://teamsource-insitute-scholarship.netlify.app/`;
 
       const shareStatus = document.getElementById("shareStatus");
       const shareInput = document.getElementById("shareMessage");
+      const headerShareButton = document.getElementById("headerShareButton");
       const nativeShareButton = document.getElementById("nativeShareButton");
       const copyShareButton = document.getElementById("copyShareButton");
 
@@ -113,11 +115,7 @@ https://teamsource-insitute-scholarship.netlify.app/`;
       document.getElementById("xShareLink").href = `https://twitter.com/intent/tweet?text=${encodedMessage}`;
       document.getElementById("facebookShareLink").href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedMessage}`;
 
-      if (!navigator.share) {
-        nativeShareButton.classList.add("hidden");
-      }
-
-      nativeShareButton.addEventListener("click", async () => {
+      async function openShareSheet() {
         try {
           const shareData = {
             title: "Teamsource Digital Marketing Scholarship",
@@ -142,6 +140,24 @@ https://teamsource-insitute-scholarship.netlify.app/`;
             shareStatus.textContent = "Sharing was not completed. You can download the image or use the buttons below instead.";
           }
         }
+      }
+
+      if (!navigator.share) {
+        nativeShareButton.classList.add("hidden");
+      }
+
+      headerShareButton.addEventListener("click", async () => {
+        if (navigator.share) {
+          await openShareSheet();
+          return;
+        }
+
+        window.open(`https://wa.me/?text=${encodedMessage}`, "_blank", "noopener,noreferrer");
+        shareStatus.textContent = "Your device does not support direct sharing here, so WhatsApp sharing was opened instead.";
+      });
+
+      nativeShareButton.addEventListener("click", async () => {
+        await openShareSheet();
       });
 
       copyShareButton.addEventListener("click", async () => {
